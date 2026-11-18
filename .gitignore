@@ -1,0 +1,16 @@
+# Private working notes, never published
+.claude-private/
+
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Local Ruby setup
+vendor/
+.bundle/
+Gemfile.lock
+
+# OS files
+.DS_Store

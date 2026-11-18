@@ -1,0 +1,35 @@
+---
+layout: default
+description: Software and research projects by marvinoka4. See what each one does and request access to the private ones.
+---
+{% assign projects = site.projects | sort: 'date' | reverse %}
+
+<section class="intro">
+  <div class="wrap">
+    <h1>Projects</h1>
+    <p class="lede">Models, simulations and tools I have built. Some are open source. Others live in private repositories: each page explains what the project does, and you can ask for access or a licence.</p>
+  </div>
+</section>
+
+<section class="wrap" aria-label="Project list">
+  {% if projects.size > 0 %}
+  <ul class="grid">
+    {% for p in projects %}
+    {% assign is_public = false %}{% if p.repo_visibility == 'public' %}{% assign is_public = true %}{% endif %}
+    <li class="card project-card">
+      {% if p.cover %}<img class="card-cover" src="{{ p.cover | relative_url }}" alt="" width="1200" height="675" loading="lazy">{% endif %}
+      <div class="card-body">
+        <p class="category">{{ p.category }}</p>
+        <h2 class="card-title"><a class="card-link" href="{{ p.url | relative_url }}">{{ p.title }}</a></h2>
+        <p class="card-tagline">{{ p.tagline }}</p>
+        <p class="card-status"><span class="badge {% if is_public %}badge-open{% else %}badge-private{% endif %}">{{ p.status }}</span></p>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="card empty">
+    <p>Projects are on their way. In the meantime, see the <a href="{{ site.portfolio_home }}">portfolio</a>.</p>
+  </div>
+  {% endif %}
+</section>

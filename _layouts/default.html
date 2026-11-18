@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.title %}{% assign page_title = page.title | append: ' | ' | append: site.title %}{% else %}{% assign page_title = site.title %}{% endif %}
+  {% assign page_desc = page.tagline | default: page.description | default: site.description | strip_newlines | strip %}
+  <title>{{ page_title | escape }}</title>
+  <meta name="description" content="{{ page_desc | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:description" content="{{ page_desc | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {% if page.cover %}<meta property="og:image" content="{{ page.cover | absolute_url }}">{% endif %}
+  <meta name="theme-color" content="#f4f4f4">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.github_user }}<span class="brand-sub">projects</span></a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Projects</a></li>
+          <li><a href="{{ site.portfolio_home }}">Portfolio</a></li>
+          <li><a href="mailto:{{ site.contact_email }}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Questions about a project or a licence? Email <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.</p>
+      <p class="muted">This page shows what each project is. Code in private repositories is only shared once access is agreed.</p>
+    </div>
+  </footer>
+</body>
+</html>

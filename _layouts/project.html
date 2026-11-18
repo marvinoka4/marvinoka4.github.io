@@ -1,0 +1,53 @@
+---
+layout: default
+---
+{% assign slug = page.slug | default: page.name | remove: '.md' %}
+{% assign is_public = false %}{% if page.repo_visibility == 'public' %}{% assign is_public = true %}{% endif %}
+{% capture default_access %}mailto:{{ site.contact_email }}?subject=Access%20to%20{{ page.title | url_encode | replace: '+', '%20' }}{% endcapture %}
+{% assign access_url = page.access_url | default: default_access %}
+{% if is_public %}{% assign access_label = 'Get the code on GitHub' %}{% else %}{% assign access_label = 'Request access' %}{% endif %}
+
+<article class="project">
+  <div class="wrap">
+    <p class="crumb"><a href="{{ '/' | relative_url }}">All projects</a></p>
+
+    <header class="hero">
+      <span class="badge {% if is_public %}badge-open{% else %}badge-private{% endif %}">{{ page.status }}</span>
+      <h1>{{ page.title }}</h1>
+      <p class="tagline">{{ page.tagline }}</p>
+    </header>
+
+    <dl class="details">
+      <div class="detail"><dt>Category</dt><dd>{{ page.category }}</dd></div>
+      <div class="detail"><dt>Role</dt><dd>{{ page.role }}</dd></div>
+      <div class="detail"><dt>Stack</dt><dd>{{ page.stack | join: ', ' }}</dd></div>
+      <div class="detail"><dt>Status</dt><dd>{{ page.status }}{% if page.year %}, {{ page.year }}{% endif %}</dd></div>
+    </dl>
+
+    {% if page.cover %}
+    <figure class="cover">
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: '' | escape }}" width="1200" height="675">
+    </figure>
+    {% endif %}
+
+    <div class="body card">
+      {{ content }}
+    </div>
+
+    <section class="cta card" aria-labelledby="cta-title">
+      <div class="cta-text">
+        <h2 id="cta-title">{% if is_public %}Use it or talk about it{% else %}Interested in {{ page.title }}?{% endif %}</h2>
+        {% if page.price_note %}<p class="price-note">{{ page.price_note }}</p>{% endif %}
+        {% if is_public and page.public_repo_url %}
+        <p class="muted">Open source. The code is free to read and use on GitHub.</p>
+        {% else %}
+        <p class="muted">The code stays private. Ask for access and I will reply with terms.</p>
+        {% endif %}
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="{{ access_url }}">{{ access_label }}</a>
+        <a class="btn btn-secondary" href="{{ site.portfolio_url }}/{{ slug }}">See the case study</a>
+      </div>
+    </section>
+  </div>
+</article>

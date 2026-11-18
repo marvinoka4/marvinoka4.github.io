@@ -1,0 +1,45 @@
+# Site settings
+title: marvinoka4 projects
+description: >-
+  Software and research projects by marvinoka4. See what each one does and
+  request access to the private ones.
+url: https://marvinoka4.github.io
+baseurl: ""
+lang: en
+
+# Links
+# Base URL of the case studies on the portfolio. Each project page links to
+# portfolio_url/<slug>. Change this one value when the portfolio moves to its
+# own domain.
+portfolio_url: https://marvins-portfolio-site-8c4811.webflow.io/portfolio-work
+portfolio_home: https://marvins-portfolio-site-8c4811.webflow.io
+contact_email: info@marvinoka4.com
+github_user: marvinoka4
+
+# Projects live in _projects/<slug>.md and are published at /projects/<slug>/
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .claude-private
